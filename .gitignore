@@ -1,0 +1,9 @@
+.idea/
+.venv/
+__pycache__/
+*.pyc
+bin/
+songs/
+bot_err.log
+bot_out.log
+token.txt

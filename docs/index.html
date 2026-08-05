@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>🎵 Musiqa Qidiruv</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>🎵 Musiqa Qidiruv</h1>
+    <p>Qo'shiq nomini yozing, qidirish tugmasini bosing</p>
+  </header>
+
+  <main class="app-content">
+    <form id="search-form" class="search-box">
+      <input
+        id="query"
+        type="text"
+        placeholder="Qo'shiq yoki artist nomi..."
+        autocomplete="off"
+        autofocus
+      />
+      <button id="search-btn" type="submit">Qidirish</button>
+    </form>
+
+    <p id="status" class="status" aria-live="polite"></p>
+    <ul id="results" class="results"></ul>
+  </main>
+
+  <footer class="app-footer">
+    Tanlangan qo'shiq bot orqali yuklab olinadi 👍
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
