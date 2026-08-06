@@ -23,7 +23,9 @@ MAX_RESULTS = 5
 MAX_NAME_LEN = 60         # Telegram audio nomi uchun xavfsiz uzunlik
 
 # ──── Telegram Mini App (WebApp) ─────────────────────────────────
-WEB_APP_URL = "https://alimadonov-ibrohim.github.io/musiqa/"
+WEB_APP_URL = os.environ.get(
+    "WEB_APP_URL", "https://alimadonov-ibrohim.github.io/musiqa/"
+)
 
 WEB_APP_PREFIX = "webapp::"  # Mini App'dan keladigan xabarlar prefiksi
 
@@ -205,12 +207,17 @@ async def handle_message(update: Update, context: ContextTypes):
         shutil.rmtree(song["workdir"], ignore_errors=True)
 
 
+def build_application(token: str) -> Application:
+    app = Application.builder().token(token).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    return app
+
+
 if __name__ == "__main__":
     if not BOT_TOKEN:
         raise SystemExit("BOT_TOKEN topilmadi!")
 
-    app = Application.builder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app = build_application(BOT_TOKEN)
     print("Bot ishga tushdi... (to'xtatish uchun Ctrl+C)")
     app.run_polling(allowed_updates=Update.ALL_TYPES)

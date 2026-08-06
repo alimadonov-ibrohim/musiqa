@@ -1,0 +1,18 @@
+{
+  "functions": {
+    "api/webhook.py": {
+      "maxDuration": 60,
+      "runtime": "python3.12"
+    }
+  },
+  "builds": [
+    { "src": "api/webhook.py", "use": "@vercel/python" },
+    { "src": "docs/index.html", "use": "@vercel/static", "config": { "basePath": "docs" } },
+    { "src": "docs/app.js", "use": "@vercel/static", "config": { "basePath": "docs" } },
+    { "src": "docs/styles.css", "use": "@vercel/static", "config": { "basePath": "docs" } }
+  ],
+  "routes": [
+    { "src": "/api/webhook", "dest": "/api/webhook" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
